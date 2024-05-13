@@ -27,6 +27,16 @@ const deleteUser = (req, res) => {
     res.send({ message: "User deleted"});
 };
 
+const registerUser = (req, res) => {
+    const { name, username, email, password } = req.body;
+    const newUser = userController.registerNewUser(name, username, email, password);
+    if (!newUser) {
+        res.status(400).send({ message: "Registration failed" });
+        return;
+    }
+       res.status(201).send({ message: "User registered successfully", user: newUser });
+};
+
 const getUserById = (req, res) => {
     const { id } =req.params;
     const user = userController.getUserById(id);
@@ -59,6 +69,7 @@ const editUserById =(req, res) => {
 module.exports = {
     getUsers,
     addUser,
+    registerUser,
     deleteUser,
     getUserById,
     editUserById,

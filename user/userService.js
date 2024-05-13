@@ -3,11 +3,15 @@ const User = require("./user");
 class UserService {
   constructor() {
     this.users = [
-     new User(1, "Dije", "dwina147@gmail.com", "dwinay", "fafifu123"),
-     new User(2, "Nane", "nanea@gmail.com", "naneags", "hadeh123"),
-     new User(3, "Ilyas", "ilyasas@gmail.com","ilyas25","kopasus123"),
+    //  new User(1, "n", "dwina147@gmail.com", "dwinay", "fafifu123"),
+    //  new User(2, "Nane", "nanea@gmail.com", "naneags", "hadeh123"),
+    //  new User(3, "Ilyas", "ilyasas@gmail.com","ilyas25","kopasus123"),
     ];
-  }
+  }  
+     getUsers() {
+      console.log("get all users");
+      return this.users;
+    } 
 
     getUserById(id) {
     const user = this.users.find(user => user.id === userId);
@@ -15,8 +19,8 @@ class UserService {
     }
 
     addUser({ name, email, username, password }) {
-    const id = this.employees.length + 1;
-    const user = new User(id, name, age, salary, username, password);
+    const id = this.users.length + 1;
+    const user = new User(id, name, email, username, password);
     this.user.push(user);
     console.log("add: ", user.id, user.name);
     return true;

@@ -5,7 +5,7 @@ const userController = new userService();
 const addUser = (req, res) => {
     const { name, email, username, password } = req.body;
 
-    const addUser = userController.addUser({name, email, username, password});
+    const addUser = registerController.addUser({name, email, username, password});
     if(!addUser) {
         res.status(400).send({message: "User not added"});
     }
