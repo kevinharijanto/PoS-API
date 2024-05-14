@@ -3,7 +3,7 @@ const User = require("./user");
 class UserService {
   constructor() {
     this.users = [
-    //  new User(1, "n", "dwina147@gmail.com", "dwinay", "fafifu123"),
+    //  new User(1, "Dije", "dwina147@gmail.com", "dwinay", "fafifu123"),
     //  new User(2, "Nane", "nanea@gmail.com", "naneags", "hadeh123"),
     //  new User(3, "Ilyas", "ilyasas@gmail.com","ilyas25","kopasus123"),
     ];
