@@ -2,19 +2,11 @@ const userService = require("../user/userService");
 
 const Service = new userService();
 
-const getUsers = (req, res) => {
-  res.send(Service.getUsers());
-};
-
-const addUser = (req, res) => {
-    const { name, email, username, password } = req.body;
-
-    const addUser = Service.addUser({name, email, username, password});
-    if(!addUser) {
-        res.status(400).send({message: "User not added"});
-    }
-
-    res.send({message: "User added"})
+const getUsers = async (req, res) => {
+    console.log(Service.getUsers());
+//   res.send(Service.getUsers());
+    // res.json(Service.getUsers());
+//   res.json(result.rows);
 };
 
 const deleteUser = (req, res) => {
@@ -27,50 +19,38 @@ const deleteUser = (req, res) => {
     res.send({ message: "User deleted"});
 };
 
-// const registerUser = (req, res) => {
-//     const { name, username, email, password } = req.body;
-//     const newUser = userController.registerNewUser(name, username, email, password);
-//     if (!newUser) {
-//         res.status(400).send({ message: "Registration failed" });
-//         return;
-//     }
-//        res.status(201).send({ message: "User registered successfully", user: newUser });
-// };
+const getUserById = (req, res) => {
+    const { id } =req.params;
+    const user = Service.getUserById(id);
+    if (!user) {
+        res.status(404).send({ message: "User not found"});
+        return;
+    }
+    res.send(user);
+};
 
-// const getUserById = (req, res) => {
-//     const { id } =req.params;
-//     const user = userController.getUserById(id);
-//     if (!user) {
-//         res.status(404).send({ message: "User not found"});
-//         return;
-//     }
-//     res.send(user);
-// };
+const editUserById =(req, res) => {
+    const { id } = req.params;
+    const { name, email, username, password} = req.body;
 
-// const editUserById =(req, res) => {
-//     const { id } = req.params;
-//     const { name, email, username, password} = req.body;
+    const editUser = Service.editUserById (id, {
+        name,
+        email,
+        username,
+        password,
+    });
+    if (!editUser) {
+        res.status(400).send ({ message: "User not edited"});
+        return;
+    }
 
-//     const editUser = editController.editUserById (id, {
-//         name,
-//         email,
-//         username,
-//         password,
-//     });
-//     if (!editUser) {
-//         res.status(400).send ({ message: "User not edited"});
-//         return;
-//     }
+    res.send({ message: "User edited"});
 
-//     res.send({ message: "User edited"});
-
-// };
+};
 
 module.exports = {
     getUsers,
-    addUser,
-    // registerUser,
     deleteUser,
-    // getUserById,
-    // editUserById,
+    getUserById,
+    editUserById,
 };

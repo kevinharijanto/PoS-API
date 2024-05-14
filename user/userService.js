@@ -1,4 +1,5 @@
 const User = require("./user");
+const db = require('../db');
 
 class UserService {
   constructor() {
@@ -8,13 +9,25 @@ class UserService {
      new User(3, "Ilyas", "ilyasas@gmail.com","ilyas25","kopasus123"),
     ];
   }  
-     getUsers() {
-      console.log("get all users");
-      return this.users;
+     async getUsers() {
+      // console.log("get all users");
+      // return this.users;
+      try {
+        const result = await db.query('SELECT * FROM public.user');
+        // console.log(result);
+        return result.rows;
+      } catch (err) {
+        console.error(err);
+        // return res.status(500).send('Internal Server Error');
+      }
     } 
+//     Database connect
+//     app.get('/', async (req, res) => {
+  
+// });
 
     getUserById(id) {
-    const user = this.users.find(user => user.id === id);
+    const user = this.users.find(user => user.id == id);
     return user || null;
     }
 
@@ -35,8 +48,7 @@ class UserService {
         }
         user.name = name;
         user.email = email;
-        user.username = salary;
-        user.password = username;
+        user.username = username;
         user.password = password;
         console.log("edited: ", user);
         return true;

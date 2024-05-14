@@ -7,16 +7,16 @@ router.route('/')
     // GET ALL USER DATA
     .get(userController.getUsers)
 
-    // INSERT USER DATA
-    .post(userController.addUser)
+    // // INSERT USER DATA
+    // .post(userController.addUser)
 
 router.route('/:id')
 
-//     // GET USER BY ID
-//     .get(userController.getUserById)
+    // GET USER BY ID
+    .get(userController.getUserById)
 
-//     // UPDATE USER
-//     .put(userController.editUserById)
+    // UPDATE USER
+    .put(userController.editUserById)
 
     // DELETE USER
     .delete(userController.deleteUser)
