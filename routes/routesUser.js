@@ -12,11 +12,11 @@ router.route('/')
 
 router.route('/:id')
 
-    // GET USER BY ID
-    .get(userController.getUserById)
+//     // GET USER BY ID
+//     .get(userController.getUserById)
 
-    // UPDATE USER
-    .put(userController.editUserById)
+//     // UPDATE USER
+//     .put(userController.editUserById)
 
     // DELETE USER
     .delete(userController.deleteUser)
