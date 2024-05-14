@@ -1,18 +1,17 @@
 const userService = require("../user/userService");
-
 const Service = new userService();
 
+const addUser = async (req, res) => {
+    const { name, email, password } = req.body;
 
-const addUser = (req, res) => {
-    const { name, email, username, password } = req.body;
-
-    const addUser = Service.addUser({name, email, username, password});
-    if(!addUser) {
-        res.status(400).send({message: "User not added"});
+    try {
+        res.status(201).json(await Service.addUser({name, email, password}));
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
     }
-
-    res.send({message: "User added"})
 };
 
-
-module.exports = registerController;
+module.exports = {
+    addUser
+};

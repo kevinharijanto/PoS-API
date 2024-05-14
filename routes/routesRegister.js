@@ -9,7 +9,7 @@ var registerController = require('../register/registerController');
 
 router.route('/')
     // SHOW REGISTER PAGE
-    .get(registerController.showRegister)
+    // .get(registerController.showRegister)
 
     // REGISTER
     .post(registerController.addUser)

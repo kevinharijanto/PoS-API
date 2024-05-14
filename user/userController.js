@@ -1,51 +1,51 @@
 const userService = require("../user/userService");
-
 const Service = new userService();
 
 const getUsers = async (req, res) => {
-    console.log(Service.getUsers());
-//   res.send(Service.getUsers());
-    // res.json(Service.getUsers());
-//   res.json(result.rows);
+    try {
+        res.status(200).json(await Service.getUsers());
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+    }
 };
 
-const deleteUser = (req, res) => {
+const getUserById = async (req, res) => {
     const { id } = req.params;
-    const deleteData = Service.deletedUserById(id);
-    if (!deleteData) {
-        res.status(404).send ({ message: "User not found"});
-        return;
+    try {
+        res.status(200).json(await Service.getUserById(id));
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
     }
-    res.send({ message: "User deleted"});
 };
 
-const getUserById = (req, res) => {
-    const { id } =req.params;
-    const user = Service.getUserById(id);
-    if (!user) {
-        res.status(404).send({ message: "User not found"});
-        return;
-    }
-    res.send(user);
-};
-
-const editUserById =(req, res) => {
+const deleteUser = async (req, res) => {
     const { id } = req.params;
-    const { name, email, username, password} = req.body;
-
-    const editUser = Service.editUserById (id, {
-        name,
-        email,
-        username,
-        password,
-    });
-    if (!editUser) {
-        res.status(400).send ({ message: "User not edited"});
-        return;
+    try {
+        let status = await Service.deletedUserById(id);
+        res.status(200).send(`User deleted with ID: ${id}`);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
     }
+};
 
-    res.send({ message: "User edited"});
+const editUserById = async (req, res) => {
+    const { id } = req.params;
+    const { name, email, password} = req.body;
 
+    try {
+        let status = await  Service.editUserById (id, {
+            name,
+            email,
+            password,
+        });
+        res.status(200).send(`User edited with ID: ${id}`);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
+    }
 };
 
 module.exports = {

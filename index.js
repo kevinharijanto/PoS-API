@@ -17,12 +17,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes sbg middleware
 const routes = require('./routes/routesIndex');
-// const register = require('./routes/routesRegister')
+const register = require('./routes/routesRegister')
 // const login = require('./routes/routesLogin');
 const users = require('./routes/routesUser');
 
 app.use('/', routes);
-// app.use('/register', register);
+app.use('/api/register', register);
 // app.use('/login', login);
 app.use('/api/users', users);
 
