@@ -33,14 +33,10 @@ const deleteUser = async (req, res) => {
 
 const editUserById = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password} = req.body;
+    // const { user_name, user_email, user_password } = req.body;
 
     try {
-        let status = await  Service.editUserById (id, {
-            name,
-            email,
-            password,
-        });
+        let status = await  Service.editUserById (id, req.body);
         res.status(200).send(`User edited with ID: ${id}`);
     } catch (err) {
         console.error(err);

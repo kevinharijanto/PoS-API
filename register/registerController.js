@@ -2,10 +2,10 @@ const userService = require("../user/userService");
 const Service = new userService();
 
 const addUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    // const { name, email, password } = req.body;
 
     try {
-        res.status(201).json(await Service.addUser({name, email, password}));
+        res.status(201).json(await Service.addUser(req.body));
     } catch (err) {
         console.error(err);
         return res.status(500).send('Internal Server Error');
